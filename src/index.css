@@ -1,0 +1,248 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 12%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 182 100% 50%;
+    --primary-foreground: 240 10% 8%;
+
+    --secondary: 300 100% 50%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 10% 15%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 120 100% 50%;
+    --accent-foreground: 240 10% 8%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 10% 20%;
+    --input: 240 10% 20%;
+    --ring: 182 100% 50%;
+
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap');
+}
+
+.font-mono {
+  font-family: 'Source Code Pro', monospace;
+}
+
+.glow {
+  text-shadow: 0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary));
+}
+
+.glow-secondary {
+  text-shadow: 0 0 5px hsl(var(--secondary)), 0 0 10px hsl(var(--secondary));
+}
+
+.glow-accent {
+  text-shadow: 0 0 5px hsl(var(--accent)), 0 0 10px hsl(var(--accent));
+}
+
+.grid-cell {
+  @apply border border-border bg-muted transition-all duration-300;
+}
+
+.grid-cell-active {
+  @apply bg-primary/20 border-primary;
+}
+
+.grid-cell-path {
+  @apply bg-accent/20 border-accent;
+}
+
+.grid-cell-solution {
+  @apply bg-secondary/20 border-secondary;
+}
+
+.neon-border {
+  box-shadow: 0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary));
+  border: 1px solid hsl(var(--primary));
+}
+
+/* Sudoku specific styles */
+.sudoku-grid {
+  @apply grid grid-cols-9 gap-0.5 max-w-md mx-auto;
+}
+
+.sudoku-cell {
+  @apply w-9 h-9 flex items-center justify-center border border-border;
+}
+
+.sudoku-cell-fixed {
+  @apply bg-muted font-bold;
+}
+
+.sudoku-cell-input {
+  @apply bg-card cursor-pointer;
+}
+
+.sudoku-cell-error {
+  @apply bg-destructive/20 border-destructive;
+}
+
+.sudoku-cell-3x3 {
+  @apply border-r-2 border-b-2 border-primary/50;
+}
+
+/* BFS Pathfinder specific styles */
+.maze-grid {
+  @apply grid gap-0.5 max-w-xl mx-auto;
+}
+
+.maze-cell {
+  @apply w-8 h-8 flex items-center justify-center border border-border cursor-pointer;
+}
+
+.maze-cell-start {
+  @apply bg-primary/30 border-primary;
+}
+
+.maze-cell-end {
+  @apply bg-accent/30 border-accent;
+}
+
+.maze-cell-wall {
+  @apply bg-muted-foreground/50 cursor-not-allowed;
+}
+
+.maze-cell-path {
+  @apply bg-secondary/30 border-secondary;
+}
+
+.maze-cell-user-path {
+  @apply bg-accent/30 border-accent;
+}
+
+/* Connect Four specific styles */
+.connect-grid {
+  @apply grid grid-cols-7 gap-1 max-w-md mx-auto bg-blue-900/20 p-2 rounded-md;
+}
+
+.connect-cell {
+  @apply w-12 h-12 rounded-full border-2 border-blue-700 bg-blue-950;
+}
+
+.connect-cell-red {
+  @apply bg-red-500 border-red-700;
+}
+
+.connect-cell-yellow {
+  @apply bg-yellow-500 border-yellow-700;
+}
+
+.connect-indicator {
+  @apply w-12 h-12 rounded-full border-2 border-dashed border-primary/50 mx-auto mb-1;
+}
+
+.connect-indicator-active {
+  @apply border-primary;
+}
+
+/* Blocks World specific styles */
+.blocks-container {
+  @apply flex gap-4 items-end justify-center;
+}
+
+.block-stack {
+  @apply flex flex-col-reverse items-center w-20;
+}
+
+.block {
+  @apply w-16 h-12 flex items-center justify-center font-bold border-2 rounded-md cursor-pointer transition-all duration-300;
+}
+
+.block-table {
+  @apply w-full h-2 bg-muted border-t border-border;
+}
+
+/* Animation classes */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+@keyframes scale-up {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scale-up {
+  animation: scale-up 0.3s ease-out forwards;
+}
+
+.room-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.room-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.room-transition-exit {
+  opacity: 1;
+}
+
+.room-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms, transform 300ms;
+}
